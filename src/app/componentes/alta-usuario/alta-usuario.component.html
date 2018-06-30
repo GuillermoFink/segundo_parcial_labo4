@@ -1,0 +1,98 @@
+<form [formGroup]="userform" (ngSubmit)="onSubmit(userform.value)">
+    <p-panel header="Registro de Usuario">
+      <div class="ui-grid ui-grid-responsive">
+        <div class="ui-grid-row" style="margin-top:2.5%;">
+  
+          <div class="ui-grid-col-12">
+            <div class="ui-inputgroup">
+              <span class="ui-inputgroup-addon">
+                <i class="fa fa-user"></i>
+              </span>
+              <span class="ui-float-label">
+                <input type="text" pInputText formControlName="nombre" id="float_nombre">
+                <label for="float_nombre">Nombre</label>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="ui-grid-row" style="margin-top:2.5%;">
+          <div class="ui-grid-col-12">
+            <div class="ui-inputgroup">
+              <span class="ui-inputgroup-addon">
+                <i class="fa fa-user"></i>
+              </span>
+              <span class="ui-float-label">
+                <input type="text" pInputText formControlName="apellido" id="float-nombre">
+                <label for="float_nombre">Apellido</label>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="ui-grid-row" style="margin-top:2.5%;">
+          <div class="ui-grid-col-12">
+            <div class="ui-inputgroup">
+              <span class="ui-inputgroup-addon">
+                <i class="fa fa-envelope"></i>
+              </span>
+              <span class="ui-float-label">
+                <input type="text" formControlName="mail" pInputText id="float-mail">
+                <label for="float-mail">Mail</label>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['nombre'].valid&&userform.controls['mail'].dirty&&userform.controls['apellido'].valid">
+          <i class="fa fa-close"></i>
+          Campos Obligatorios
+        </div>
+  
+  
+        <div class="ui-grid-row" style="margin-top:2.5%;">
+  
+          <div class="ui-grid-col-12">
+            <div class="ui-inputgroup">
+              <span class="ui-inputgroup-addon">
+                <i class="fa fa-lock"></i>
+              </span>
+              <span class="ui-float-label">
+                <input type="password" formControlName="password" pInputText id="float_pw" id="pw">
+                <label for="float_pw">Contraseña</label>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="ui-grid-row" style="margin-top:2.5%;">
+          <div class="ui-grid-col-12">
+            <div class="ui-inputgroup">
+              <span class="ui-inputgroup-addon">
+                <i class="fa fa-lock"></i>
+              </span>
+              <span class="ui-float-label">
+                <input type="password" formControlName="password2" pInputText id="float_pw2">
+                <label for="float_pw2">Repetir Contraseña</label>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ui-grid-row" style="margin-top:2.5%;">
+
+            <div class="ui-grid-col-12">
+              <div class="ui-inputgroup">
+                <span class="ui-inputgroup-addon">
+                  <i class="fas fa-address-card"></i>
+                </span>
+                <p-dropdown [options]="tipo" formControlName="tipo"></p-dropdown>
+              </div>
+            </div>
+          </div>
+  
+        <div class="ui-grid-row" style="margin-top:2.5%; text-align: center;">
+          <button pButton type="submit" [disabled]="!userform.valid" icon="fa fa-check" iconPos="center" label="Aceptar"></button>
+          <button pButton class="ui-button-danger" icon="fa fa-times" iconPos="center" routerLink="/admin" label="Cancelar"></button>
+        </div>
+      </div>
+  
+  
+    </p-panel>
+  </form>

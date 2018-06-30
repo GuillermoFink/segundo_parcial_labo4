@@ -1,0 +1,35 @@
+<div class="bg">
+
+
+    <div class="ui-g">
+        <div class="ui-g-3"></div>
+        <div class="ui-g-6">
+            <p-panel header="Iniciar Sesion">
+
+                <div class="ui-inputgroup">
+                    <span class="ui-inputgroup-addon">
+                        <i class="fa fa-user"></i>
+                    </span>
+                    <input type="text" pInputText placeholder="Mail" [(ngModel)]="usuario">
+                </div>
+                <div class="ui-inputgroup" style="margin-top: 1%;">
+                    <span class="ui-inputgroup-addon">
+                        <i class="fa fa-lock"></i>
+                    </span>
+                    <input type="password" pInputText placeholder="Password" [(ngModel)]="password" >
+
+                </div>
+                <div style="margin-top: 2%;">
+                        <button pButton type="button" icon="fas fa-angle-double-right" label="Iniciar Sesion" class="ui-button-success" (click)="login()"
+                        style="margin-right: .25em"></button>
+                        <button pButton type="button" icon="far fa-hand-point-up" label="Crear Cuenta" class="ui-button-warning" routerLink="/registro"
+                        style="margin-right: .25em"></button>
+                </div>
+                
+            </p-panel>
+        </div>
+        <div class="ui-g-3"></div>
+    </div>
+
+</div>
+

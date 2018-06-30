@@ -1,0 +1,83 @@
+<div style="margin-top: 2%;">
+  <p-panel header="Turnos">
+
+    <p-table #dt [columns]="cols" [value]="cuerpoTabla" [paginator]="true" [rows]="10" selectionMode="single" [(selection)]="turnoSelecto"
+      (onRowSelect)="onRowSelect($event)">
+
+      <ng-template pTemplate="caption">
+          <div style="text-align: left">
+              <button type="button" pButton icon="far fa-file-excel" iconPos="left" label="Exportar" (click)="dt.exportCSV()" style="float:left"></button>
+          </div>
+        <div style="text-align: right">
+          <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+          <input type="text" pInputText size="20" placeholder="Filtro Global" (input)="dt.filterGlobal($event.target.value, 'contains')"
+            style="width:auto">
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns">
+            {{col.header}}
+          </th>
+        </tr>
+        <tr>
+          <th *ngFor="let col of columns" [ngSwitch]="col.field">
+            <input *ngSwitchCase="'vin'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+            <p-dropdown *ngSwitchCase="'estado'" [options]="opciones" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
+
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr [pSelectableRow]="rowData">
+          <td *ngFor="let col of columns">
+            {{rowData[col.field] | descTurno}}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+  </p-panel>
+</div>
+
+<div *ngIf="turnoSelecto" style="margin-top: 2%;">
+  <p-panel header="Detalle de turno">
+    <table>
+      <tr>
+        <td>Solicitado por:</td>
+        <td> {{turnoSelecto.nombre}} {{turnoSelecto.apellido}} </td>
+      </tr>
+      <tr>
+        <td>Vehiculo:</td>
+        <td> {{turnoSelecto.patente}} </td>
+      </tr>
+      <tr>
+        <td>Fecha:</td>
+        <td> {{turnoSelecto.fecha}} </td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td *ngIf="!modificarTurno"> {{turnoSelecto.descripcion}} </td>
+        <td *ngIf="modificarTurno">
+          <textarea pInputTextarea [(ngModel)]="desc" id="textArea"></textarea>
+        </td>
+      </tr>
+    </table>
+    <p-footer>
+      <div *ngIf="turnoSelecto.estado != 1">
+        Turno finalizado.
+      </div>
+      <button pButton type="button" icon="fa fa-check" label="Confirmar" class="ui-button-success" style="margin-right: .25em"
+        (click)="confirmarTurno()" *ngIf="turnoSelecto.estado == 1"></button>
+      <button pButton type="button" icon="far fa-sticky-note" label="Actualizar Estado" class="ui-button-warning" (click)="editarTurno()"
+        style="margin-right: .25em" *ngIf="turnoSelecto.estado == 1"></button>
+      <button pButton type="button" icon="fas fa-comment" label="Guardar Cambios" class="ui-button-info" style="margin-right: .25em"
+        *ngIf="modificarTurno" (click)="actualizarTurno()"></button>
+      <button pButton type="button" icon="fas fa-comment" label="Cencelar" class="ui-button-secondary" style="margin-right: .25em"
+        *ngIf="modificarTurno" (click)="cancelarEdicion()"></button>
+      <button pButton type="button" icon="fas fa-ban" label="Cancelar Turno" class="ui-button-danger" style="margin-right: .25em"
+        (click)="cancelarTurno()" *ngIf="turnoSelecto.estado == 1"></button>
+    </p-footer>
+  </p-panel>
+
+</div>

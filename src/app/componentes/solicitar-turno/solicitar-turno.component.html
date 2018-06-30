@@ -1,0 +1,55 @@
+<div class="ui-g">
+  <div class="ui-g-6 ui-g-nopad">
+    <div class="ui-g-12">
+      <app-tabla-mis-vehiculos [id_usuario]="id_usuario" (seleccion)="mascotaElegida($event)"></app-tabla-mis-vehiculos>
+    </div>
+
+    <div class="ui-g-12" *ngIf="date1 && miVehiculo.patente != null">
+      <p-panel header="Confirmacion de turno">
+        <table>
+          <tr>
+            <td>Dueño:</td>
+            <td>{{nombreUsuario}} {{apellidoUsuario}} </td>
+          </tr>
+          <tr>
+            <td>Vehiculo:</td>
+            <td> {{miVehiculo.patente}} </td>
+          </tr>
+          <tr>
+            <td>Cuando?:</td>
+            <td>{{date1}}</td>
+          </tr>
+          <tr>
+            <td>Descripcion:</td>
+            <td>
+              <textarea pInputTextarea [(ngModel)]="desc" (ngModelChange)="canCaracteres()" id="textArea"></textarea>
+              <br>
+            </td>
+          </tr>
+          <tr>
+            <td>Caracteres restantes:</td>
+            <td>{{cantChar}}</td>
+          </tr>
+        </table>
+
+        <button pButton type="button" label="Confirmar" icon="pi pi-check" style="margin-right: .25em" (click)="altaTurno()"></button>
+        <button pButton type="button" label="Cancelar" icon="pi pi-times" class="ui-button-warning" (click)="cancelarTurno()"></button>
+      </p-panel>
+
+    </div>
+  </div>
+  <div class="ui-g-6">
+    <div class="ui-g-3"></div>
+    <div class="ui-g-6">
+      <p-panel header="Seleccion de fecha">
+        <p-calendar [(ngModel)]="date1" [showTime]="true" [locale]="es" dateFormat="dd/mm/yy" tabindex="0" [disabledDates]="invalidDates"
+          [disabledDays]="[0,6]" readonlyInput="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2018:2030"
+          showButtonBar="true" [inline]="true"></p-calendar>
+      </p-panel>
+    </div>
+    <div class="ui-g-3"></div>
+
+
+  </div>
+
+</div>

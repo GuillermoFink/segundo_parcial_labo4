@@ -1,0 +1,54 @@
+<app-tabla-mis-vehiculos [id_usuario]="id_usuario" (seleccion)="mascotaElegida($event)"></app-tabla-mis-vehiculos>
+
+<p-dialog header="Mi Mascota" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [width]="300">
+    <div class="ui-g ui-fluid" *ngIf="miMascota">
+            <div class="ui-g-12">
+                    <div class="ui-g-4">
+                        <label for="raza">Marca</label>
+                    </div>
+                    <div class="ui-g-8">
+                        <input pInputText id="raza" [(ngModel)]="miVehiculo.marca" />
+                    </div>
+                </div>
+        <div class="ui-g-12">
+            <div class="ui-g-4">
+                <label for="raza">Patente</label>
+            </div>
+            <div class="ui-g-8">
+                <input pInputText id="raza" [(ngModel)]="miVehiculo.patente" />
+            </div>
+        </div>
+        <div class="ui-g-12">
+            <div class="ui-g-4">
+                <label for="color">Color</label>
+            </div>
+            <div class="ui-g-8">
+                <input pInputText id="color" [(ngModel)]="miVehiculo.color" />
+            </div>
+        </div>
+        <div class="ui-g-12">
+            <div class="ui-g-4">
+                <label for="edad">Kms</label>
+            </div>
+            <div class="ui-g-8">
+                <input pInputText id="edad" [(ngModel)]="miVehiculo.kilometros" />
+            </div>
+        </div>
+        <div class="ui-g-12">
+            <div class="ui-g-4">
+                <label for="tipo">Tipo</label>
+            </div>
+            <div class="ui-g-8">
+                <p-dropdown [options]="mascotas" [(ngModel)]="miVehiculo.tipo"></p-dropdown>
+            </div>
+        </div>
+
+        
+    </div>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            <button type="button" pButton icon="fa fa-close" (click)="cancelar()" label="Cancelar"></button>
+            <button type="button" pButton icon="fa fa-check" (click)="guardar()" label="Guardar"></button>
+        </div>
+    </p-footer>
+</p-dialog>
